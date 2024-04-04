@@ -7,31 +7,40 @@
 <section>
     
     <div class="container my-4">
-
+        @if ($errors->any())
         <a href="{{ route('admin.projects.index') }}" class="my-4 btn btn-primary"><i class="fa-solid fa-table me-1">
-            </i> Torna alla Lista
-        </a>
-
-
-        <h1>Modifica Project</h1>
-
+        </i> Torna alla Lista
+    </a>
+    
+    
+    <h1>Modifica Project</h1>
+    
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>                    
+            @endforeach
+        </ul>
+    </div>
+        
+    @endif
         <form action="{{ route('admin.projects.update', $project) }}" class="row g-3" method="POST">
             @method('PATCH')
             @csrf
 
             <div class="col-12">
                 <label for="title" class="form-label">TITOLO</label>
-                <input type="text" name="title" id="title" class="form-control" value="{{ $project['title'] }}">
+                <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $project['title']) }}">
             </div>
 
             <div class="col-12">
                 <label for="content" class="form-label">CONTENUTO</label>
-                <textarea type="text" name="content" id="content" class="form-control" rows="5">{{ $project['content'] }}</textarea>
+                <textarea type="text" name="content" id="content" class="form-control" rows="5">{{ old('content', $project['content']) }}</textarea>
             </div>
 
             <div class="col-12">
                 <button class="btn btn-success">
-                    <i class="fa-solid fa-floppy-disk me-1">
+                    <i class="fa-solid fa-floppy-disk me-1"></i>
                         Modifica                
                 </button>
             </div>

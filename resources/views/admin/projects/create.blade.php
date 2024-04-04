@@ -7,20 +7,29 @@
 <section>
     
     <div class="container my-4">
-
         <a href="{{ route('admin.projects.index') }}" class="my-4 btn btn-primary"><i class="fa-solid fa-table me-1">
-            </i> Torna alla Lista
-        </a>
-
-
-        <h1>Crea Project</h1>
-
+        </i> Torna alla Lista
+    </a>
+    
+    
+    <h1>Crea Project</h1>
+    
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>                    
+            @endforeach
+        </ul>
+    </div>
+        
+    @endif
         <form action="{{ route('admin.projects.store') }}" class="row g-3" method="POST">
             @csrf
 
             <div class="col-12">
                 <label for="title" class="form-label">TITOLO</label>
-                <input type="text" name="title" id="title" class="form-control">
+                <input type="text" name="title" id="title" class="form-control" >
             </div>
 
             <div class="col-12">
@@ -30,7 +39,7 @@
 
             <div class="col-12">
                 <button class="btn btn-success">
-                    <i class="fa-solid fa-floppy-disk me-1">
+                    <i class="fa-solid fa-floppy-disk me-1"></i>
                         Salva                
                 </button>
             </div>
